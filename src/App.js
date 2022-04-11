@@ -9,12 +9,9 @@ import picture from './pictures/tennis_racket_and_ball.jpg';
 
 function App() {
 
-  console.log('4');
   const [player, setPlayer] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [matches, setMatches] = useState('');
-  console.log('1');
-  console.log({matches});
 
   function addPlayer(name) {
     const player = {name};
@@ -63,16 +60,11 @@ function App() {
       })
         .then(res => {
           res.data;
-          console.log(res.data);
           setMatches(res.data);
-          console.log('3');
-          console.log({matches});
         })
         .catch(err => console.error(err));
     }
     fetchData();
-    console.log('2');
-    console.log({matches});
   },[]);
   
     
