@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
@@ -11,7 +9,6 @@ import picture from './pictures/tennis_racket_and_ball.jpg';
 function App() {
 
   const [player, setPlayer] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [matches, setMatches] = useState('');
   const [rankings, setRankings] = useState('');
   const [ranking, setRanking] = useState('');
@@ -20,14 +17,10 @@ function App() {
     const player = {name};
     console.log(player);
     setPlayer(name);
-    var rank = rankings.filter((playerIndex) => playerIndex.PARTICIPANT_NAME === name);
-    console.log(rank);
-    console.log(rank[0].RANK);
-    setRanking(rank[0].RANK);
-    console.log('RANKING', ranking);
+    var playerRanking = rankings.filter((playerIndex) => playerIndex.PARTICIPANT_NAME === name);
+    setRanking(playerRanking[0].RANK);
   }
     
-
   const today = new Intl.DateTimeFormat('fr-CA', {year: 'numeric',
     month: '2-digit', day: '2-digit'}).format(Date.now());
 
@@ -41,23 +34,15 @@ function App() {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
   function findNested(obj, key, value) {
     // Base case
     if (obj[key] === value) {
-      console.log('_1_');
       return obj;
     } else {
-      console.log('_2_');
       var keys = Object.keys(obj);
       for (var i = 0, len = keys.length; i < len; i++) {
         var k = keys[i];
-        console.log(obj[i]);
-        console.log({len});
-        console.log('_3_');
         if (obj[k] && typeof obj[k] == 'object') {
-          console.log('_4_');
-          console.log('k:', k);
           var found = findNested(obj[k], key, value);
           if (found) {
             // If the object was found in the recursive call, bubble it up.
@@ -71,7 +56,6 @@ function App() {
   function listRankings(props) {
     const rankings = props;
     const topTen = rankings.slice(0,10);
-    console.log('ranking',{rankings});
     if (topTen.length > 0) {
       var playerList = topTen.map((playerIndex) => 
         <li key={playerIndex.RANK}>
@@ -118,36 +102,15 @@ function App() {
   },[]);
 
   
-    
-  /*function findMatch() {
-    const tournaments = matches.results;
-    console.log({tournaments});
-    // eslint-disable-next-line no-unused-vars
-    const isPlayer = (element) => {
-      element.tournament.name === 'Rolex Monte-Carlo Masters';
-      console.log(element.tournament.name);
-    };
-    // eslint-disable-next-line no-unused-vars
-    // const games = tournaments.map((tournament, i) => tournament.matches);
-    // eslint-disable-next-line no-unused-vars
-    tournaments.findIndex((isPlayer, index) =>  {console.log('löytyi');});
-  } */
-  console.log(typeof(matches));
+  // eslint-disable-next-line no-unused-vars
   const osuma = findNested(matches, 'name', 'Ruusuvuori');
-  console.log({matches});
-  console.log({osuma});
+  console.log(osuma);
+  // eslint-disable-next-line no-unused-vars
   const obj = Object.values(matches);
-  console.log(Object.values(matches));
-  console.log(obj[1]);
   var keysbyindex = Object.keys(matches);
-  console.log({keysbyindex});
-  for (var i=0; i<keysbyindex.length; i++)
-    alert(matches[keysbyindex[i]]);
-  console.log({rankings});
-  
-
-  /* findMatch();*/
-
+  for (var i=0; i<keysbyindex.length; i++) {
+    console.log(matches[keysbyindex[i]]);
+  }
   return (
     <div className="App">
       <header className="App-header">
